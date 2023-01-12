@@ -1,7 +1,7 @@
 # https://help.github.com/en/articles/metadata-syntax-for-github-actions
-name: 'Docker Metadata action'
+name: 'test build'
 description: "GitHub Action to extract metadata (tags, labels) for Docker"
-author: 'docker'
+author: 'chroju'
 branding:
   icon: 'anchor'
   color: 'blue'
