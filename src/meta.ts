@@ -127,6 +127,9 @@ export class Meta {
     }
 
     const currentDate = this.date;
+    if (core.isDebug()) {
+      core.info(tag.attrs['pattern']);
+    }
     const vraw = this.setValue(
       handlebars.compile(tag.attrs['pattern'])({
         date: function (format, options) {
@@ -141,6 +144,9 @@ export class Meta {
                 throw new Error(`Unknown ${key} attribute`);
             }
           });
+          if (core.isDebug()) {
+            core.info(tz);
+          }
           return m.tz(tz).format(format);
         }
       }),
@@ -453,6 +459,9 @@ export class Meta {
   public getTags(): Array<string> {
     if (!this.version.main) {
       return [];
+    }
+    if (core.isDebug()) {
+      core.info(this.tags.join('\n'));
     }
     const tags: Array<string> = [];
     for (const imageName of this.getImageNames()) {
