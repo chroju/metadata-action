@@ -71,6 +71,7 @@ export class Meta {
       if (!/true/i.test(enabled)) {
         continue;
       }
+      core.warning(String(tag.type));
       switch (tag.type) {
         case tcl.Type.Schedule: {
           version = this.procSchedule(version, tag);
@@ -127,9 +128,7 @@ export class Meta {
     }
 
     const currentDate = this.date;
-    if (core.isDebug()) {
-      core.info(tag.attrs['pattern']);
-    }
+    core.warning(tag.attrs['pattern']);
     const vraw = this.setValue(
       handlebars.compile(tag.attrs['pattern'])({
         date: function (format, options) {
@@ -144,9 +143,7 @@ export class Meta {
                 throw new Error(`Unknown ${key} attribute`);
             }
           });
-          if (core.isDebug()) {
-            core.info(tz);
-          }
+          core.warning(tz);
           return m.tz(tz).format(format);
         }
       }),
@@ -461,7 +458,7 @@ export class Meta {
       return [];
     }
     if (core.isDebug()) {
-      core.info(this.tags.join('\n'));
+      core.warning(this.tags.join('\n'));
     }
     const tags: Array<string> = [];
     for (const imageName of this.getImageNames()) {
